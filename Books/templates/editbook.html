@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+{% extends 'index.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="card mb-4">
+    <h5 class="card-header">Edit Book</h5>
+    <div class="card-body">
+        <form method="POST" action="{% url 'updatebook' dataid=data.id%}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Books Category Name</label>
+                <select class="form-select" name="c_nme">
+                          <option>{{data.b_category}}</option>
+                    {% for i in lists %}
+                          <option value="{{i.c_name}}">{{i.c_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" >Book Name</label>
+                <input type="text" class="form-control"  placeholder="Book Name" name="b_name" value="{{data.b_name}}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" >Book Price</label>
+                <input type="number" class="form-control"  placeholder="Price" name="b_price" value="{{data.b_price}}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Book Description</label>
+                <div class="input-group input-group-merge">
+                    <textarea  class="form-control" placeholder="Description" name="b_description">{{data.b_description}}</textarea>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" >Auther Name</label>
+                <input type="text" class="form-control"  placeholder="Book Name" name="b_auther" value="{{data.b_auther}}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">About Auther</label>
+                <div class="input-group input-group-merge">
+                    <textarea  class="form-control" placeholder="Auther" name="b_auther_descri">{{data.b_auth_desc}}</textarea>
+                </div>
+            </div>
+            <img src="{{data.b_cover.url}}" height="100px" width="100px">
+            <div class="mb-3">
+                <label class="form-label" >Book Cover</label>
+                <input type="file" class="form-control"  placeholder="Category Name" name="b_image">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}

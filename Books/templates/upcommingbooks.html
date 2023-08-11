@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+{% extends 'index.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="card mb-4">
+    <h5 class="card-header">Add Upcomming Books</h5>
+    <div class="card-body">
+        <form method="POST" action="{% url 'saveupcomebk' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label" >Book Name</label>
+                <input type="text" class="form-control"  placeholder="Book Name" name="b_name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Book Description</label>
+                <div class="input-group input-group-merge">
+                    <textarea  class="form-control" placeholder="Description" name="b_description"></textarea>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" >Book Cover</label>
+                <input type="file" class="form-control"  placeholder="Category Name" name="b_image">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+{% extends 'index.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="card mb-4">
+    <h5 class="card-header">Edit Category</h5>
+    <div class="card-body">
+        <form method="POST" action="{% url 'updatecategory' dataid=data.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Books Category Name</label>
+                <select class="form-select" name="c_nme">
+                          <option>{{data.c_name}}</option>
+                    {% for i in lists %}
+                          <option value="{{i.c_name}}">{{i.c_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <div class="input-group input-group-merge">
+                    <textarea id="basic-default-message" class="form-control" placeholder="Description" name="b_description">{{data.c_description}}</textarea>
+                </div>
+            </div>
+            <img src="{{data.c_img.url}}" height="100px" width="100px">
+            <div class="mb-3">
+                <label class="form-label" >Image</label>
+                <input type="file" class="form-control"  placeholder="Category Name" name="c_image" value="{{data.c_img}}">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}
